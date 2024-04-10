@@ -53,5 +53,28 @@ if(idx==deck.length){
         return sol;
     }
 }
+//optimized code with queue
+import java.util.*;
+
+class Solution {
+    public int[] deckRevealedIncreasing(int[] deck) {
+        Arrays.sort(deck);
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < deck.length; i++) {
+            q.add(i);
+        }
+        int ans[] = new int[deck.length];
+        for (int card : deck) {
+            int idx = q.remove();
+            ans[idx] = card;
+            if (!q.isEmpty()) {
+                int idx2 = q.remove();
+                q.add(idx2);
+            }
+        }
+        return ans;
+    }
+}
+
 
 //LEETCODE
